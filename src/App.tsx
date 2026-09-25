@@ -12,6 +12,7 @@ import { WebSandboxViewer } from './components/WebSandboxViewer';
 import { TabCloaker } from './components/TabCloaker';
 import { CodePlayground } from './components/CodePlayground';
 import { JsonManagerModal } from './components/JsonManagerModal';
+import { PasscodeGate, PASSCODE_STORAGE_KEY } from './components/PasscodeGate';
 import { useGamesStore } from './services/gamesStore';
 import { Game } from './types/game';
 import { triggerPanic } from './data/cloakPresets';
@@ -26,6 +27,7 @@ export default function App() {
     toggleFavorite,
     addGame,
     removeGame,
+    updateGame,
     resetToDefault,
     importJsonCatalog,
     downloadJson,
@@ -36,6 +38,24 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [isJsonModalOpen, setIsJsonModalOpen] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(48);
+
+  // Authentication gate state with persistence
+  const [isUnlocked, setIsUnlocked] = useState<boolean>(() => {
+    return localStorage.getItem(PASSCODE_STORAGE_KEY) === 'unlocked' ||
+           sessionStorage.getItem(PASSCODE_STORAGE_KEY) === 'unlocked';
+  });
+
+  const handleLockSite = () => {
+    localStorage.removeItem(PASSCODE_STORAGE_KEY);
+    sessionStorage.removeItem(PASSCODE_STORAGE_KEY);
+    setIsUnlocked(false);
+  };
+
+  // Reset pagination when filter/search changes
+  useEffect(() => {
+    setVisibleCount(48);
+  }, [searchTerm, selectedCategory]);
 
   // Global Panic Key Listener (Esc)
   useEffect(() => {
@@ -59,7 +79,22 @@ export default function App() {
     setSelectedGame(null);
   };
 
-  const categories = ['All', 'Favorites', 'Puzzle', 'Arcade', 'Action', 'Casual', 'Sports', 'Custom'];
+  const categories = [
+    'All',
+    'Favorites',
+    'Action',
+    'Racing',
+    'Horror',
+    'Sports',
+    'Platformer',
+    'Shooter',
+    'Puzzle',
+    'Arcade',
+    'Multiplayer',
+    'Retro',
+    'Sandbox',
+    'Custom'
+  ];
 
   const filteredGames = games.filter(g => {
     const matchesSearch = 
@@ -72,11 +107,20 @@ export default function App() {
     if (selectedCategory === 'All') return true;
     if (selectedCategory === 'Favorites') return favorites.includes(g.id);
     if (selectedCategory === 'Custom') return !!g.isCustom;
-    return g.category.toLowerCase() === selectedCategory.toLowerCase();
+    const catLower = selectedCategory.toLowerCase();
+    return (
+      g.category.toLowerCase() === catLower ||
+      (g.tags && g.tags.some(t => t.toLowerCase() === catLower))
+    );
   });
 
   const featuredGame = games.find(g => g.featured) || games[0];
   const favoriteGamesList = games.filter(g => favorites.includes(g.id));
+
+  // If site is locked with access code, display the security gate screen
+  if (!isUnlocked) {
+    return <PasscodeGate onUnlock={() => setIsUnlocked(true)} />;
+  }
 
   return (
     <div className="min-h-screen bg-[#07130c] text-slate-100 flex flex-col selection:bg-[#ff2d55]/30 selection:text-white">
@@ -92,6 +136,7 @@ export default function App() {
           }
         }}
         onOpenAddGame={() => setIsJsonModalOpen(true)}
+        onLockSite={handleLockSite}
       />
 
       {/* Main Content Area */}
@@ -105,6 +150,7 @@ export default function App() {
             onBack={handleBackToHub}
             onSelectGame={handleSelectGame}
             allGames={games}
+            onUpdateGame={updateGame}
           />
         ) : (
           <>
@@ -160,22 +206,44 @@ export default function App() {
                       <span>{selectedCategory === 'All' ? 'Complete Games Catalog' : `${selectedCategory} Games`}</span>
                     </h2>
                     <span className="text-xs text-slate-400 font-mono tabular-nums">
-                      Showing {filteredGames.length} of {games.length}
+                      Showing {Math.min(visibleCount, filteredGames.length)} of {filteredGames.length} {filteredGames.length === games.length ? 'games' : `(from ${games.length} total)`}
                     </span>
                   </div>
 
                   {filteredGames.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-                      {filteredGames.map(game => (
-                        <GameCard
-                          key={game.id}
-                          game={game}
-                          isFavorite={favorites.includes(game.id)}
-                          onToggleFavorite={toggleFavorite}
-                          onPlay={handleSelectGame}
-                        />
-                      ))}
-                    </div>
+                    <>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                        {filteredGames.slice(0, visibleCount).map(game => (
+                          <GameCard
+                            key={game.id}
+                            game={game}
+                            isFavorite={favorites.includes(game.id)}
+                            onToggleFavorite={toggleFavorite}
+                            onPlay={handleSelectGame}
+                          />
+                        ))}
+                      </div>
+
+                      {visibleCount < filteredGames.length && (
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-6 pb-2">
+                          <button
+                            onClick={() => setVisibleCount(prev => Math.min(prev + 48, filteredGames.length))}
+                            className="px-6 py-3 bg-[#10b981] hover:bg-[#34d399] text-[#064e3b] font-bold text-sm rounded-xl transition-all shadow-lg hover:shadow-emerald-900/40 hover:-translate-y-0.5 cursor-pointer flex items-center gap-2"
+                          >
+                            <span>Load More Games (+48)</span>
+                            <span className="text-xs bg-[#064e3b]/20 px-2 py-0.5 rounded-full font-mono">
+                              {filteredGames.length - visibleCount} left
+                            </span>
+                          </button>
+                          <button
+                            onClick={() => setVisibleCount(filteredGames.length)}
+                            className="px-5 py-3 bg-[#0c2016] hover:bg-[#122e20] text-emerald-400 border border-[#16402a] font-semibold text-sm rounded-xl transition-colors cursor-pointer"
+                          >
+                            Show All {filteredGames.length} Games
+                          </button>
+                        </div>
+                      )}
+                    </>
                   ) : (
                     <div className="p-12 text-center bg-[#0c2016] border border-[#16402a] rounded-2xl flex flex-col items-center justify-center gap-3">
                       <span className="text-4xl">🍉</span>

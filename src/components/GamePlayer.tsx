@@ -10,19 +10,22 @@ import {
   Check, 
   Sparkles,
   Info,
-  Tv
+  Tv,
+  Code,
+  Save,
+  Undo2
 } from 'lucide-react';
 import { Game } from '../types/game';
 import { openAboutBlankGame, resolveAssetUrl } from '../services/gamesStore';
 
 interface GamePlayerProps {
-
   game: Game;
   isFavorite: boolean;
   onToggleFavorite: (id: string) => void;
   onBack: () => void;
   onSelectGame: (game: Game) => void;
   allGames: Game[];
+  onUpdateGame?: (gameId: string, updates: Partial<Game>) => void;
 }
 
 export const GamePlayer: React.FC<GamePlayerProps> = ({
@@ -31,7 +34,8 @@ export const GamePlayer: React.FC<GamePlayerProps> = ({
   onToggleFavorite,
   onBack,
   onSelectGame,
-  allGames
+  allGames,
+  onUpdateGame
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -39,6 +43,24 @@ export const GamePlayer: React.FC<GamePlayerProps> = ({
   const [isTheater, setIsTheater] = useState(false);
   const [copied, setCopied] = useState(false);
   const [keyCounter, setKeyCounter] = useState(0);
+
+  // Live Iframe HTML Replacement State
+  const defaultIframeCode = game.iframeCode || `<iframe src="${game.iframeSrc}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; gamepad; pointer-lock" allowfullscreen></iframe>`;
+  const [showIframeEditor, setShowIframeEditor] = useState(false);
+  const [iframeHtmlInput, setIframeHtmlInput] = useState(defaultIframeCode);
+  const [activeIframeSrc, setActiveIframeSrc] = useState(game.iframeSrc);
+  const [activeCustomHtml, setActiveCustomHtml] = useState<string | undefined>(game.customHtml);
+  const [savedSuccess, setSavedSuccess] = useState(false);
+
+  // Sync state whenever the selected game changes
+  useEffect(() => {
+    const code = game.iframeCode || `<iframe src="${game.iframeSrc}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; gamepad; pointer-lock" allowfullscreen></iframe>`;
+    setIframeHtmlInput(code);
+    setActiveIframeSrc(game.iframeSrc);
+    setActiveCustomHtml(game.customHtml);
+    setShowIframeEditor(false);
+    setSavedSuccess(false);
+  }, [game.id, game.iframeSrc, game.iframeCode, game.customHtml]);
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -66,10 +88,53 @@ export const GamePlayer: React.FC<GamePlayerProps> = ({
   };
 
   const handleCopyEmbed = () => {
-    const code = game.iframeCode || `<iframe src="${window.location.origin}${game.iframeSrc}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
-    navigator.clipboard.writeText(code);
+    navigator.clipboard.writeText(iframeHtmlInput);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  // Parse and apply new iframe HTML or URL
+  const handleApplyIframeHtml = (saveToStorage: boolean = false) => {
+    const raw = iframeHtmlInput.trim();
+    if (!raw) return;
+
+    let newSrc = raw;
+    let newCustomHtml: string | undefined = undefined;
+
+    if (raw.includes('<iframe') && raw.includes('src=')) {
+      // Extract src attribute from iframe HTML
+      const match = raw.match(/src=["'](.*?)["']/i);
+      if (match && match[1]) {
+        newSrc = match[1];
+      }
+    } else if (raw.includes('<html') || raw.includes('<!DOCTYPE') || raw.includes('<script') || raw.includes('<div')) {
+      // Entire HTML snippet
+      newCustomHtml = raw;
+    } else if (!raw.startsWith('http://') && !raw.startsWith('https://') && !raw.startsWith('/')) {
+      newSrc = 'https://' + raw;
+    }
+
+    setActiveIframeSrc(newSrc);
+    setActiveCustomHtml(newCustomHtml);
+    setKeyCounter(prev => prev + 1);
+
+    if (saveToStorage && onUpdateGame) {
+      onUpdateGame(game.id, {
+        iframeSrc: newSrc,
+        iframeCode: raw,
+        customHtml: newCustomHtml
+      });
+      setSavedSuccess(true);
+      setTimeout(() => setSavedSuccess(false), 2500);
+    }
+  };
+
+  const handleResetIframe = () => {
+    const origCode = game.iframeCode || `<iframe src="${game.iframeSrc}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; gamepad; pointer-lock" allowfullscreen></iframe>`;
+    setIframeHtmlInput(origCode);
+    setActiveIframeSrc(game.iframeSrc);
+    setActiveCustomHtml(game.customHtml);
+    setKeyCounter(prev => prev + 1);
   };
 
   const relatedGames = allGames.filter(g => g.id !== game.id).slice(0, 4);
@@ -93,15 +158,97 @@ export const GamePlayer: React.FC<GamePlayerProps> = ({
           <span className="text-white font-medium">{game.title}</span>
         </div>
 
-        <button
-          onClick={() => openAboutBlankGame(game)}
-          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#10b981] bg-[#10b981]/15 hover:bg-[#10b981]/25 border border-[#10b981]/30 rounded-lg transition-colors cursor-pointer"
-          title="Open in stealth about:blank window"
-        >
-          <ExternalLink className="w-3.5 h-3.5" />
-          <span>Stealth Window (about:blank)</span>
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setShowIframeEditor(!showIframeEditor)}
+            className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer border ${
+              showIframeEditor 
+                ? 'bg-[#10b981] text-[#064e3b] border-[#10b981]' 
+                : 'text-emerald-400 bg-[#16402a]/60 hover:bg-[#16402a] border-[#16402a]'
+            }`}
+            title="Replace game with custom iframe HTML"
+          >
+            <Code className="w-3.5 h-3.5" />
+            <span>{showIframeEditor ? 'Close Iframe Editor' : 'Replace Iframe HTML'}</span>
+          </button>
+
+          <button
+            onClick={() => openAboutBlankGame({
+              ...game,
+              iframeSrc: activeIframeSrc,
+              customHtml: activeCustomHtml
+            })}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#10b981] bg-[#10b981]/15 hover:bg-[#10b981]/25 border border-[#10b981]/30 rounded-lg transition-colors cursor-pointer"
+            title="Open in stealth about:blank window"
+          >
+            <ExternalLink className="w-3.5 h-3.5" />
+            <span>Stealth Window</span>
+          </button>
+        </div>
       </div>
+
+      {/* Slide-down Iframe HTML Editor / Replacer */}
+      {showIframeEditor && (
+        <div className="bg-[#0b1f14] border border-[#10b981]/50 rounded-2xl p-5 shadow-2xl flex flex-col gap-4 animate-in fade-in slide-in-from-top-2 duration-200">
+          <div className="flex items-center justify-between border-b border-[#16402a] pb-3">
+            <div className="flex items-center gap-2">
+              <Code className="w-4 h-4 text-[#10b981]" />
+              <h3 className="text-sm font-bold text-white">Replace Game Iframe HTML</h3>
+              <span className="text-xs text-slate-400">
+                (Paste any working <code>&lt;iframe&gt;</code> embed, raw HTML, or game link)
+              </span>
+            </div>
+            {savedSuccess && (
+              <span className="text-xs text-[#34d399] font-medium flex items-center gap-1">
+                <Check className="w-3.5 h-3.5" /> Saved to your catalog!
+              </span>
+            )}
+          </div>
+
+          <textarea
+            value={iframeHtmlInput}
+            onChange={(e) => setIframeHtmlInput(e.target.value)}
+            rows={4}
+            className="w-full px-3 py-2.5 bg-[#06140d] border border-[#16402a] focus:border-[#10b981] rounded-xl text-xs font-mono text-emerald-300 focus:outline-none focus:ring-1 focus:ring-[#10b981] resize-y"
+            placeholder={`<iframe src="https://..." width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; gamepad; pointer-lock" allowfullscreen></iframe>`}
+          />
+
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => handleApplyIframeHtml(false)}
+                className="px-4 py-2 bg-[#10b981] hover:bg-[#34d399] text-[#064e3b] font-bold text-xs rounded-lg transition-colors cursor-pointer shadow-md"
+              >
+                Apply & Test Now
+              </button>
+              {onUpdateGame && (
+                <button
+                  onClick={() => handleApplyIframeHtml(true)}
+                  className="px-3.5 py-2 bg-[#16402a] hover:bg-[#255238] text-emerald-300 border border-[#2d6a4f] font-semibold text-xs rounded-lg transition-colors cursor-pointer flex items-center gap-1.5"
+                >
+                  <Save className="w-3.5 h-3.5" />
+                  <span>Save Permanently</span>
+                </button>
+              )}
+              <button
+                onClick={handleResetIframe}
+                className="px-3 py-2 bg-[#0c2016] hover:bg-[#16402a] text-slate-400 hover:text-white text-xs rounded-lg transition-colors cursor-pointer flex items-center gap-1.5"
+              >
+                <Undo2 className="w-3.5 h-3.5" />
+                <span>Reset Default</span>
+              </button>
+            </div>
+
+            <button
+              onClick={handleCopyEmbed}
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#08160f] hover:bg-[#16402a] text-slate-300 text-xs font-medium rounded-lg border border-[#16402a] transition-colors cursor-pointer"
+            >
+              {copied ? <Check className="w-3.5 h-3.5 text-[#10b981]" /> : <Copy className="w-3.5 h-3.5" />}
+              <span>{copied ? 'Copied HTML!' : 'Copy Current HTML'}</span>
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Main Game Player Frame Container */}
       <div 
@@ -122,6 +269,16 @@ export const GamePlayer: React.FC<GamePlayerProps> = ({
           </div>
 
           <div className="flex items-center gap-1 sm:gap-2">
+            <button
+              onClick={() => setShowIframeEditor(!showIframeEditor)}
+              className={`p-2 rounded-lg transition-colors cursor-pointer ${
+                showIframeEditor ? 'text-[#10b981] bg-[#10b981]/20' : 'text-slate-400 hover:text-white hover:bg-[#16402a]'
+              }`}
+              title="Replace or Edit Iframe HTML"
+            >
+              <Code className="w-4 h-4" />
+            </button>
+
             <button
               onClick={() => onToggleFavorite(game.id)}
               className={`p-2 rounded-lg transition-colors cursor-pointer ${
@@ -160,22 +317,19 @@ export const GamePlayer: React.FC<GamePlayerProps> = ({
           </div>
         </div>
 
-        {/* The Game Iframe */}
+        {/* The Game Iframe - Clean Unrestricted Embed (No breaking sandbox) */}
         <div className="relative flex-1 w-full h-full bg-[#08160f] overflow-hidden">
           <iframe
             key={`${game.id}-${keyCounter}`}
             ref={iframeRef}
-            src={game.customHtml ? undefined : (game.iframeSrc.startsWith('http') || game.iframeSrc.startsWith('data:') ? game.iframeSrc : resolveAssetUrl(game.iframeSrc))}
-            srcDoc={game.customHtml || undefined}
+            src={activeCustomHtml ? undefined : (activeIframeSrc.startsWith('http') || activeIframeSrc.startsWith('data:') ? activeIframeSrc : resolveAssetUrl(activeIframeSrc))}
+            srcDoc={activeCustomHtml || undefined}
             title={game.title}
-
             className="w-full h-full border-0 block"
-            allow="autoplay; fullscreen; gamepad; pointer-lock; focus-without-user-activation *"
+            allow="autoplay; fullscreen; gamepad; pointer-lock; focus-without-user-activation; camera; microphone *"
             allowFullScreen
-
-            sandbox={game.sandbox || "allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-storage-access-by-user-activation allow-pointer-lock"}
+            sandbox={game.sandbox ? game.sandbox : undefined}
           />
-
         </div>
       </div>
 
@@ -196,18 +350,41 @@ export const GamePlayer: React.FC<GamePlayerProps> = ({
                 </div>
               </div>
 
-              <button
-                onClick={handleCopyEmbed}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-[#16402a]/60 hover:bg-[#16402a] rounded-lg transition-colors cursor-pointer"
-              >
-                {copied ? <Check className="w-3.5 h-3.5 text-[#10b981]" /> : <Copy className="w-3.5 h-3.5" />}
-                <span>{copied ? 'Copied Iframe!' : 'Copy Iframe Code'}</span>
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setShowIframeEditor(true)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-emerald-300 hover:text-white bg-[#16402a] hover:bg-[#255238] rounded-lg transition-colors cursor-pointer border border-[#2d6a4f]"
+                  title="Replace iframe HTML for this game"
+                >
+                  <Code className="w-3.5 h-3.5" />
+                  <span>Replace Iframe HTML</span>
+                </button>
+                <button
+                  onClick={handleCopyEmbed}
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-[#16402a]/60 hover:bg-[#16402a] rounded-lg transition-colors cursor-pointer"
+                >
+                  {copied ? <Check className="w-3.5 h-3.5 text-[#10b981]" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copied ? 'Copied HTML!' : 'Copy Iframe Code'}</span>
+                </button>
+              </div>
             </div>
 
             <p className="text-sm text-slate-300 mt-4 leading-relaxed">
               {game.description}
             </p>
+
+            {/* Embedded Iframe Preview Box */}
+            <div className="mt-5 p-3.5 rounded-xl bg-[#06140d] border border-[#16402a]">
+              <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
+                <span className="font-mono text-emerald-400 font-semibold flex items-center gap-1.5">
+                  <Code className="w-3.5 h-3.5" /> Active Iframe HTML:
+                </span>
+                <span className="text-[11px] text-slate-500 truncate max-w-xs">{activeIframeSrc}</span>
+              </div>
+              <pre className="text-[11px] font-mono text-slate-300 overflow-x-auto whitespace-pre-wrap break-all p-2 bg-[#040c08] rounded-lg border border-[#0d2919]">
+                {iframeHtmlInput}
+              </pre>
+            </div>
 
             {/* Controls table */}
             {game.controls && game.controls.length > 0 && (
@@ -251,7 +428,7 @@ export const GamePlayer: React.FC<GamePlayerProps> = ({
         <div className="flex flex-col gap-4">
           <h4 className="text-sm font-bold text-white flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-[#10b981]" />
-            More Games from JSON
+            More Games from Catalog
           </h4>
           <div className="flex flex-col gap-3">
             {relatedGames.map(rel => (
@@ -265,6 +442,7 @@ export const GamePlayer: React.FC<GamePlayerProps> = ({
                   alt={rel.title}
                   className="w-14 h-14 rounded-lg object-cover bg-[#08160f] shrink-0"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
                 />
                 <div className="flex flex-col overflow-hidden">
                   <span className="text-xs font-bold text-white group-hover:text-[#10b981] transition-colors truncate">

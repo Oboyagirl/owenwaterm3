@@ -7,7 +7,7 @@ export interface Game {
   id: string;
   title: string;
   description: string;
-  category: 'Action' | 'Arcade' | 'Puzzle' | 'Casual' | 'Sports' | 'Retro' | 'Custom';
+  category: 'Action' | 'Arcade' | 'Puzzle' | 'Casual' | 'Sports' | 'Retro' | 'Custom' | 'Racing' | 'Horror' | 'Platformer' | 'Strategy' | 'Multiplayer' | 'Sandbox' | 'Shooter' | (string & {});
   thumbnail: string;
   banner?: string;
   tags: string[];

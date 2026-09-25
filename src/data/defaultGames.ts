@@ -6,8 +6,9 @@ import retroBowlThumb from '../assets/images/retro_bowl_thumb_1790305313008.jpg'
 import grannyThumb from '../assets/images/granny_horror_thumb_1790306419920.jpg';
 import basketRandomThumb from '../assets/images/basket_random_thumb_1790306430872.jpg';
 import fnafThumb from '../assets/images/fnaf1_game_thumb_1790306441084.jpg';
+import ubgGamesList from './ubgFilteredGames.json';
 
-export const DEFAULT_GAMES: Game[] = [
+const CURATED_GAMES: Game[] = [
   {
     id: "granny",
     title: "Granny",
@@ -41,9 +42,8 @@ export const DEFAULT_GAMES: Game[] = [
     plays: 53100,
     author: "RHM Interactive",
     featured: true,
-    iframeSrc: "https://ubghyper.github.io/GameList.github.io/Basket-Random/",
-    iframeCode: `<iframe id="plyIframe" class="ply-iframe" title="Basket Random — UBGHyper" allow="fullscreen; autoplay" allowfullscreen="" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-top-navigation-by-user-activation allow-popups" src="https://ubghyper.github.io/GameList.github.io/Basket-Random/"></iframe>`,
-    sandbox: "allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-top-navigation-by-user-activation allow-popups",
+    iframeSrc: "https://basket-random.pages.dev/",
+    iframeCode: `<iframe src="https://basket-random.pages.dev/" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; gamepad; pointer-lock" allowfullscreen></iframe>`,
     controls: [
       { key: "W", action: "Player 1 Jump & Shoot" },
       { key: "Up Arrow", action: "Player 2 Jump & Shoot" }
@@ -82,12 +82,265 @@ export const DEFAULT_GAMES: Game[] = [
     author: "New Star Games",
     featured: true,
     iframeSrc: "https://retro--bowl.pages.dev/",
-    iframeCode: `<iframe id="innerFrame" name="innerFrame" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-storage-access-by-user-activation" frameborder="0" allowfullscreen="" src="https://retro--bowl.pages.dev/" style="overflow: auto;"></iframe>`,
-    sandbox: "allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-storage-access-by-user-activation",
+    iframeCode: `<iframe src="https://retro--bowl.pages.dev/" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; gamepad; pointer-lock" allowfullscreen></iframe>`,
     controls: [
       { key: "Mouse Drag & Release", action: "Pass & Aim Football" },
       { key: "W / S or Up / Down", action: "Dodge Tackles & Stiff Arm" },
       { key: "Click / Tap", action: "Dive & Snap" }
+    ]
+  },
+  {
+    id: "drive-mad",
+    title: "Drive Mad",
+    description: "Navigate tricky obstacle courses in this physics-based driving game! Balance your truck carefully to reach the finish line without flipping.",
+    category: "Racing",
+    thumbnail: "https://ubghyper.github.io/GameList.github.io/Drive-Mad/logo.png",
+    banner: arcadeBanner,
+    tags: ["Racing", "Physics", "Truck", "Driving", "Popular"],
+    rating: 4.9,
+    plays: 89400,
+    author: "Martin Magni",
+    featured: true,
+    iframeSrc: "https://drive-mad.pages.dev/",
+    iframeCode: `<iframe src="https://drive-mad.pages.dev/" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; gamepad; pointer-lock" allowfullscreen></iframe>`,
+    controls: [
+      { key: "W / D or Up / Right", action: "Drive Forward / Steer" },
+      { key: "S / A or Down / Left", action: "Brake / Reverse" }
+    ]
+  },
+  {
+    id: "slope",
+    title: "Slope",
+    description: "Roll an ultra-fast ball down a futuristic 3D neon tunnel course. Dodge obstacles, adjust your speed, and test your lightning-quick reflexes!",
+    category: "Action",
+    thumbnail: "https://ubghyper.github.io/GameList.github.io/Slope/logo.png",
+    banner: arcadeBanner,
+    tags: ["3D", "Runner", "Reflex", "Neon", "Arcade"],
+    rating: 4.9,
+    plays: 95200,
+    author: "Rob Kay",
+    featured: true,
+    iframeSrc: "https://slope.pages.dev/",
+    iframeCode: `<iframe src="https://slope.pages.dev/" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; gamepad; pointer-lock" allowfullscreen></iframe>`,
+    controls: [
+      { key: "A / D or ← / →", action: "Steer Ball Left & Right" }
+    ]
+  },
+  {
+    id: "subway-surfers",
+    title: "Subway Surfers",
+    description: "Dash along the subway tracks, dodge trains, leap over obstacles, and escape the grumpy inspector and his dog in the world's most famous endless runner!",
+    category: "Action",
+    thumbnail: "https://ubghyper.github.io/GameList.github.io/Subway-Surfers/subway-surfers.png",
+    banner: arcadeBanner,
+    tags: ["Endless Runner", "Action", "3D", "Classic"],
+    rating: 4.9,
+    plays: 124000,
+    author: "SYBO Games",
+    featured: true,
+    iframeSrc: "https://subway-surfers.pages.dev/",
+    iframeCode: `<iframe src="https://subway-surfers.pages.dev/" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; gamepad; pointer-lock" allowfullscreen></iframe>`,
+    controls: [
+      { key: "← / →", action: "Move Left / Right" },
+      { key: "↑ / Space", action: "Jump Over Barriers" },
+      { key: "↓", action: "Slide Under Obstacles" }
+    ]
+  },
+  {
+    id: "bitlife",
+    title: "Bitlife Life Simulator",
+    description: "How will you live your BitLife? Make choices from birth through old age: study hard, fall in love, commit crimes, or become a billionaire!",
+    category: "Casual",
+    thumbnail: "https://ubghyper.github.io/GameList.github.io/Bitlife/bitlife.png",
+    banner: arcadeBanner,
+    tags: ["Simulation", "RPG", "Choice", "Story"],
+    rating: 4.8,
+    plays: 87100,
+    author: "Candywriter",
+    featured: true,
+    iframeSrc: "https://bitlife.pages.dev/",
+    iframeCode: `<iframe src="https://bitlife.pages.dev/" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; gamepad; pointer-lock" allowfullscreen></iframe>`,
+    controls: [
+      { key: "Mouse Click", action: "Make Life Decisions" }
+    ]
+  },
+  {
+    id: "1v1-lol",
+    title: "1v1.LOL",
+    description: "Competitive third-person building simulator and shooter. Practice fast box fights, edit stairs, and battle players in 1v1 arenas.",
+    category: "Action",
+    thumbnail: "https://freeonlinewebtools.github.io/gamelist7.github.io/1v1-LOL/logo.png",
+    banner: arcadeBanner,
+    tags: ["Shooter", "Building", "Multiplayer", "Battle Royale", "1v1"],
+    rating: 4.9,
+    plays: 110000,
+    author: "JustPlay.LOL",
+    featured: true,
+    iframeSrc: "https://1v1-lol.pages.dev/",
+    iframeCode: `<iframe src="https://1v1-lol.pages.dev/" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; gamepad; pointer-lock" allowfullscreen></iframe>`,
+    controls: [
+      { key: "WASD", action: "Move Character" },
+      { key: "Left Click", action: "Shoot / Build" },
+      { key: "Z / X / C / V", action: "Select Wall / Floor / Stairs" }
+    ]
+  },
+  {
+    id: "cuphead",
+    title: "Cuphead",
+    description: "The classic boss rush run-and-gun game inspired by 1930s rubber hose animation. Dodge projectiles, learn patterns, and defeat epic bosses.",
+    category: "Action",
+    thumbnail: "https://freeonlinewebtools.github.io/gamelist8.github.io/Cuphead/logo.png",
+    banner: arcadeBanner,
+    tags: ["Action", "Boss", "Retro", "Difficult"],
+    rating: 4.9,
+    plays: 68000,
+    author: "Studio MDHR",
+    featured: true,
+    iframeSrc: "https://freeonlinewebtools.github.io/gamelist8.github.io/Cuphead/",
+    iframeCode: `<iframe src="https://freeonlinewebtools.github.io/gamelist8.github.io/Cuphead/" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; gamepad; pointer-lock" allowfullscreen></iframe>`,
+    controls: [
+      { key: "Arrow Keys", action: "Move & Duck" },
+      { key: "Z", action: "Jump" },
+      { key: "X", action: "Shoot Finger Gun" }
+    ]
+  },
+  {
+    id: "minecraft-1-12",
+    title: "Minecraft 1.12.2 (Eaglercraft)",
+    description: "Full Minecraft running in your browser: mine diamonds, craft tools, build huge structures, and play survival or creative mode!",
+    category: "Sandbox",
+    thumbnail: "https://freeonlinewebtools.github.io/gamelist9.github.io/Minecraft/minecraft.png",
+    banner: arcadeBanner,
+    tags: ["Sandbox", "Building", "Survival", "Crafting", "Minecraft"],
+    rating: 5.0,
+    plays: 145000,
+    author: "lax1dude / Mojang",
+    featured: true,
+    iframeSrc: "https://freeonlinewebtools.github.io/gamelist9.github.io/Minecraft/",
+    iframeCode: `<iframe src="https://freeonlinewebtools.github.io/gamelist9.github.io/Minecraft/" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; gamepad; pointer-lock" allowfullscreen></iframe>`,
+    controls: [
+      { key: "WASD", action: "Walk & Strafe" },
+      { key: "Space", action: "Jump" },
+      { key: "Left Click", action: "Break Block / Attack" },
+      { key: "Right Click", action: "Place Block / Use" },
+      { key: "E", action: "Open Inventory" }
+    ]
+  },
+  {
+    id: "granny-2",
+    title: "Granny: Chapter Two",
+    description: "Granny and Grandpa keep you locked in their house this time. To survive, you have to try to get out of their house, but be careful and quiet!",
+    category: "Action",
+    thumbnail: "https://freeonlinewebtools.github.io/gamelist4.github.io/Granny-2/Granny-2.png",
+    banner: arcadeBanner,
+    tags: ["Horror", "Escape", "Survival", "3D", "Granny"],
+    rating: 4.9,
+    plays: 58200,
+    author: "DVloper",
+    featured: false,
+    iframeSrc: "https://freeonlinewebtools.github.io/gamelist4.github.io/Granny-2/",
+    iframeCode: `<iframe src="https://freeonlinewebtools.github.io/gamelist4.github.io/Granny-2/" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; gamepad; pointer-lock" allowfullscreen></iframe>`,
+    controls: [
+      { key: "WASD", action: "Walk" },
+      { key: "Mouse", action: "Look Around" },
+      { key: "E", action: "Interact" },
+      { key: "C", action: "Crouch" }
+    ]
+  },
+  {
+    id: "fnaf-2",
+    title: "Five Nights at Freddy's 2",
+    description: "Welcome back to the new and improved Freddy Fazbear's Pizza! The old animatronics are joined by a new cast. Put on your Freddy Fazbear head to trick them!",
+    category: "Action",
+    thumbnail: "https://freeonlinewebtools.github.io/gamelist8.github.io/FNAF-2/FNAF-2.png",
+    banner: arcadeBanner,
+    tags: ["Horror", "FNAF", "Survival", "Strategy"],
+    rating: 4.9,
+    plays: 72100,
+    author: "Scott Cawthon",
+    featured: false,
+    iframeSrc: "https://freeonlinewebtools.github.io/gamelist8.github.io/FNAF-2/",
+    iframeCode: `<iframe src="https://freeonlinewebtools.github.io/gamelist8.github.io/FNAF-2/" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; gamepad; pointer-lock" allowfullscreen></iframe>`,
+    controls: [
+      { key: "Mouse Hover", action: "Pan Office" },
+      { key: "Space / Ctrl", action: "Flashlight" },
+      { key: "Bottom Hover", action: "Wear Mask / Monitor" }
+    ]
+  },
+  {
+    id: "fnaf-3",
+    title: "Five Nights at Freddy's 3",
+    description: "Thirty years after Freddy Fazbear's Pizza closed its doors, the events that took place there have become nothing more than a rumor. Survive Springtrap!",
+    category: "Action",
+    thumbnail: "https://freeonlinewebtools.github.io/gamelist8.github.io/FNAF-3/FNAF-3.png",
+    banner: arcadeBanner,
+    tags: ["Horror", "FNAF", "Survival", "Strategy"],
+    rating: 4.8,
+    plays: 64900,
+    author: "Scott Cawthon",
+    featured: false,
+    iframeSrc: "https://freeonlinewebtools.github.io/gamelist8.github.io/FNAF-3/",
+    iframeCode: `<iframe src="https://freeonlinewebtools.github.io/gamelist8.github.io/FNAF-3/" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; gamepad; pointer-lock" allowfullscreen></iframe>`,
+    controls: [
+      { key: "Mouse Hover", action: "Pan Room" },
+      { key: "Panel Click", action: "Reboot Systems / Audio" }
+    ]
+  },
+  {
+    id: "fnaf-4",
+    title: "Five Nights at Freddy's 4",
+    description: "The final chapter of the Five Nights at Freddy's original story. You must defend yourself against Nightmare Freddy, Chica, Bonnie, and Foxy lurking in your bedroom!",
+    category: "Action",
+    thumbnail: "https://freeonlinewebtools.github.io/gamelist6.github.io/FNAF-4/FNAF-4.png",
+    banner: arcadeBanner,
+    tags: ["Horror", "FNAF", "Survival", "Darkness"],
+    rating: 4.9,
+    plays: 69100,
+    author: "Scott Cawthon",
+    featured: false,
+    iframeSrc: "https://freeonlinewebtools.github.io/gamelist6.github.io/FNAF-4/",
+    iframeCode: `<iframe src="https://freeonlinewebtools.github.io/gamelist6.github.io/FNAF-4/" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; gamepad; pointer-lock" allowfullscreen></iframe>`,
+    controls: [
+      { key: "Mouse Click", action: "Run to Doors / Bed" },
+      { key: "Ctrl", action: "Flashlight" },
+      { key: "Shift", action: "Hold Door Shut" }
+    ]
+  },
+  {
+    id: "sprunki",
+    title: "Sprunki Incredibox",
+    description: "The viral musical rhythm game with quirky animated beatboxers and dark horror transformations!",
+    category: "Arcade",
+    thumbnail: "https://ubghyper.github.io/GameList.github.io/Sprunki/sprunki.png",
+    banner: arcadeBanner,
+    tags: ["Music", "Rhythm", "Sprunki", "Beatbox"],
+    rating: 4.9,
+    plays: 93400,
+    author: "So Far So Good / NyankoBfLol",
+    featured: true,
+    iframeSrc: "https://sprunki.pages.dev/",
+    iframeCode: `<iframe src="https://sprunki.pages.dev/" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; gamepad; pointer-lock" allowfullscreen></iframe>`,
+    controls: [
+      { key: "Mouse Drag", action: "Drag Characters & Outfits" }
+    ]
+  },
+  {
+    id: "level-devil",
+    title: "Level Devil",
+    description: "A deceptively tricky platformer where floors collapse, spikes appear out of nowhere, and the portals move when you get close!",
+    category: "Action",
+    thumbnail: "https://ubghyper.github.io/GameList.github.io/Level-Devil/level-devil.png",
+    banner: arcadeBanner,
+    tags: ["Platformer", "Troll", "Puzzle", "Reflex"],
+    rating: 4.9,
+    plays: 81200,
+    author: "Unept",
+    featured: true,
+    iframeSrc: "https://level-devil.pages.dev/",
+    iframeCode: `<iframe src="https://level-devil.pages.dev/" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; gamepad; pointer-lock" allowfullscreen></iframe>`,
+    controls: [
+      { key: "A / D or ← / →", action: "Move" },
+      { key: "Space or W or ↑", action: "Jump" }
     ]
   },
   {
@@ -234,6 +487,11 @@ export const DEFAULT_GAMES: Game[] = [
       { key: "↑ / ↓", action: "Player 2 Paddle" }
     ]
   }
+];
+
+export const DEFAULT_GAMES: Game[] = [
+  ...CURATED_GAMES,
+  ...(ubgGamesList as unknown as Game[])
 ];
 
 export { wmLogo, wmThumb, arcadeBanner };

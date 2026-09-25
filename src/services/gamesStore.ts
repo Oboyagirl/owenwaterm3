@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { Game } from '../types/game';
 import { DEFAULT_GAMES } from '../data/defaultGames';
 
-const STORAGE_KEY = 'owen_watermelon_v3_games';
+const STORAGE_KEY = 'owen_watermelon_v3_games_v4';
+const PREV_KEY = 'owen_watermelon_v3_games_v3';
 const FAVORITES_KEY = 'owen_watermelon_v3_favorites';
 
 export function resolveAssetUrl(url: string): string {
@@ -56,13 +57,23 @@ export function useGamesStore() {
         const parsed: Game[] = JSON.parse(cached);
         if (Array.isArray(parsed) && parsed.length > 0) {
           const sanitized = parsed.map(sanitizeGame);
-          // Merge in any newly added default games (like retro-bowl)
           const existingIds = new Set(sanitized.map(g => g.id));
           const missingDefaults = DEFAULT_GAMES.filter(dg => !existingIds.has(dg.id));
           if (missingDefaults.length > 0) {
-            return [...missingDefaults, ...sanitized];
+            return [...sanitized, ...missingDefaults];
           }
           return sanitized;
+        }
+      } else {
+        const prev = localStorage.getItem(PREV_KEY);
+        if (prev) {
+          try {
+            const prevParsed: Game[] = JSON.parse(prev);
+            const customGames = prevParsed.filter(g => g.isCustom);
+            if (customGames.length > 0) {
+              return [...customGames, ...DEFAULT_GAMES];
+            }
+          } catch {}
         }
       }
     } catch (e) {
@@ -127,6 +138,15 @@ export function useGamesStore() {
     }
   };
 
+  const updateGame = (gameId: string, updates: Partial<Game>) => {
+    setGames(prev =>
+      prev.map(g => (g.id === gameId ? { ...g, ...updates } : g))
+    );
+    if (selectedGame?.id === gameId) {
+      setSelectedGame(prev => (prev ? { ...prev, ...updates } : null));
+    }
+  };
+
   const resetToDefault = () => {
     setGames(DEFAULT_GAMES);
     localStorage.removeItem(STORAGE_KEY);
@@ -169,6 +189,7 @@ export function useGamesStore() {
     toggleFavorite,
     addGame,
     removeGame,
+    updateGame,
     resetToDefault,
     importJsonCatalog,
     downloadJson,

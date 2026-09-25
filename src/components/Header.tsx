@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldAlert, Plus } from 'lucide-react';
+import { ShieldAlert, Plus, Lock } from 'lucide-react';
 import { triggerPanic } from '../data/cloakPresets';
 import wmLogo from '../assets/images/owen_watermelon_logo_1790304644388.jpg';
 
@@ -7,6 +7,7 @@ interface HeaderProps {
   currentTab: 'games' | 'sandbox' | 'cloaker' | 'playground' | 'catalog';
   onSelectTab: (tab: 'games' | 'sandbox' | 'cloaker' | 'playground' | 'catalog') => void;
   onOpenAddGame: () => void;
+  onLockSite?: () => void;
   activeCloakTitle?: string;
 }
 
@@ -14,6 +15,7 @@ export const Header: React.FC<HeaderProps> = ({
   currentTab,
   onSelectTab,
   onOpenAddGame,
+  onLockSite,
 }) => {
   return (
     <header className="sticky top-0 z-40 w-full bg-[#08160f]/90 backdrop-blur-md border-b border-[#16402a] px-4 lg:px-8 py-3.5">
@@ -79,7 +81,7 @@ export const Header: React.FC<HeaderProps> = ({
         </nav>
 
         {/* Zone 3: 1-2 primary actions */}
-        <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
           <button
             onClick={onOpenAddGame}
             className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-[#10b981]/20 hover:bg-[#10b981]/30 border border-[#10b981]/40 rounded-lg transition-all whitespace-nowrap cursor-pointer"
@@ -88,6 +90,17 @@ export const Header: React.FC<HeaderProps> = ({
             <Plus className="w-3.5 h-3.5 text-[#10b981]" />
             <span className="hidden sm:inline">Add Game</span>
           </button>
+
+          {onLockSite && (
+            <button
+              onClick={onLockSite}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-[#0c2016] hover:bg-[#16402a] border border-[#16402a] rounded-lg transition-all whitespace-nowrap cursor-pointer"
+              title="Lock site with passcode"
+            >
+              <Lock className="w-3.5 h-3.5 text-slate-400" />
+              <span className="hidden sm:inline">Lock</span>
+            </button>
+          )}
 
           <button
             onClick={triggerPanic}

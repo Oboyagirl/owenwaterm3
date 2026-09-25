@@ -1,69 +1,5 @@
 [
   {
-    "id": "granny",
-    "title": "Granny",
-    "description": "Granny is a horror survival game playable free and unblocked at UBGHyper. Runs instantly in your browser with no download, no sign-up, and works at school on a Chromebook.",
-    "category": "Horror",
-    "thumbnail": "https://freeonlinewebtools.github.io/gamelist4.github.io/Granny/Granny.png",
-    "tags": [
-      "Horror",
-      "Action"
-    ],
-    "rating": 4.6,
-    "plays": 149707,
-    "author": "DVloper",
-    "iframeSrc": "https://freeonlinewebtools.github.io/gamelist4.github.io/Granny/",
-    "iframeCode": "<iframe src=\"https://freeonlinewebtools.github.io/gamelist4.github.io/Granny/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
-  },
-  {
-    "id": "drive-mad",
-    "title": "Drive Mad",
-    "description": "Navigate obstacle courses in this physics-based driving challenge! Balance your vehicle carefully to avoid flips and reach the finish.",
-    "category": "Racing",
-    "thumbnail": "https://ubghyper.github.io/GameList.github.io/Drive-Mad/logo.png",
-    "tags": [
-      "Racing",
-      "Physics"
-    ],
-    "rating": 4.8,
-    "plays": 141885,
-    "author": "S. J. Entertainment",
-    "iframeSrc": "https://drive-mad.pages.dev/",
-    "iframeCode": "<iframe src=\"https://drive-mad.pages.dev/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
-  },
-  {
-    "id": "slope",
-    "title": "Slope",
-    "description": "Race down an infinite slope at breakneck speed! Dodge obstacles in this intensely addictive endless runner.",
-    "category": "Action",
-    "thumbnail": "https://ubghyper.github.io/GameList.github.io/Slope/slope.jpg",
-    "tags": [
-      "Action",
-      "Arcade"
-    ],
-    "rating": 4.7,
-    "plays": 131666,
-    "author": "Rob Kay",
-    "iframeSrc": "https://slope.pages.dev/",
-    "iframeCode": "<iframe src=\"https://slope.pages.dev/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
-  },
-  {
-    "id": "sprunki",
-    "title": "Sprunki",
-    "description": "Sprunki is a rhythm puzzle game playable free and unblocked at UBGHyper. Runs instantly in your browser with no download, no sign-up, and works at school on a Chromebook.",
-    "category": "Rhythm",
-    "thumbnail": "https://ubghyper.github.io/GameList.github.io/Sprunki/Sprunki.png",
-    "tags": [
-      "Rhythm",
-      "Puzzle"
-    ],
-    "rating": 4.8,
-    "plays": 95529,
-    "author": "NyankoBfLol",
-    "iframeSrc": "https://sprunki.pages.dev/",
-    "iframeCode": "<iframe src=\"https://sprunki.pages.dev/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
-  },
-  {
     "id": "amongus-online",
     "title": "Among Us Online",
     "description": "Fan-made Among Us! Complete tasks as crewmate or deceive as impostor. Social deduction at its finest!",
@@ -80,38 +16,6 @@
     "iframeCode": "<iframe src=\"https://ubghyper.github.io/GameList.github.io/AmongUs-Online/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
   },
   {
-    "id": "level-devil",
-    "title": "Level Devil",
-    "description": "Level Devil is a platformer action game playable free and unblocked at UBGHyper. Runs instantly in your browser with no download, no sign-up, and works at school on a Chromebook.",
-    "category": "Platformer",
-    "thumbnail": "https://ubghyper.github.io/GameList.github.io/Level-Devil/Level-Devil.png",
-    "tags": [
-      "Platformer",
-      "Action"
-    ],
-    "rating": 4.7,
-    "plays": 35672,
-    "author": "UBG Community",
-    "iframeSrc": "https://level-devil.pages.dev/",
-    "iframeCode": "<iframe src=\"https://level-devil.pages.dev/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
-  },
-  {
-    "id": "subway-surfers",
-    "title": "Subway Surfers",
-    "description": "Subway Surfers is a arcade action game playable free and unblocked at UBGHyper. Runs instantly in your browser with no download, no sign-up, and works at school on a Chromebook.",
-    "category": "Arcade",
-    "thumbnail": "https://ubghyper.github.io/GameList.github.io/Subway-Surfers/Subway-Surfers.png",
-    "tags": [
-      "Arcade",
-      "Action"
-    ],
-    "rating": 5.0,
-    "plays": 37598,
-    "author": "UBG Community",
-    "iframeSrc": "https://subway-surfers.pages.dev/",
-    "iframeCode": "<iframe src=\"https://subway-surfers.pages.dev/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
-  },
-  {
     "id": "speed-stars",
     "title": "Speed Stars",
     "description": "Speed Stars is a racing game playable free and unblocked at UBGHyper. Runs instantly in your browser with no download, no sign-up, and works at school on a Chromebook.",
@@ -125,55 +29,6 @@
     "author": "Luke Doukakis",
     "iframeSrc": "https://freeonlinewebtools.github.io/gamelist6.github.io/Speed-Stars/",
     "iframeCode": "<iframe src=\"https://freeonlinewebtools.github.io/gamelist6.github.io/Speed-Stars/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
-  },
-  {
-    "id": "bitlife",
-    "title": "Bitlife",
-    "description": "Live a complete virtual life from birth to death! Make choices that shape your character's destiny in this interactive life simulator.",
-    "category": "Simulation",
-    "thumbnail": "https://ubghyper.github.io/GameList.github.io/Bitlife/bitlife.png",
-    "tags": [
-      "Simulation",
-      "Adventure"
-    ],
-    "rating": 4.6,
-    "plays": 159459,
-    "author": "Candywriter, LLC",
-    "iframeSrc": "https://bitlife.pages.dev/",
-    "iframeCode": "<iframe src=\"https://bitlife.pages.dev/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
-  },
-  {
-    "id": "cuphead",
-    "title": "Cuphead",
-    "description": "Experience the classic run-and-gun action of Cuphead in your browser! Battle through beautifully hand-drawn levels, face off against challenging bosses, and enjoy the vintage cartoon art style that made this game a hit.",
-    "category": "Sandbox",
-    "thumbnail": "https://freeonlinewebtools.github.io/gamelist8.github.io/Cuphead/cuphead.png",
-    "tags": [
-      "Sandbox",
-      "Simulation"
-    ],
-    "rating": 4.5,
-    "plays": 92902,
-    "author": "Studio MDHR, WebPort by woahhcrackers",
-    "iframeSrc": "https://freeonlinewebtools.github.io/gamelist8.github.io/Cuphead/",
-    "iframeCode": "<iframe src=\"https://freeonlinewebtools.github.io/gamelist8.github.io/Cuphead/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
-  },
-  {
-    "id": "basket-random",
-    "title": "Basket Random",
-    "description": "Wacky basketball with ragdoll physics! One-button controls in constantly changing environments. Perfect for quick matches!",
-    "category": "Sports",
-    "thumbnail": "https://ubghyper.github.io/GameList.github.io/Basket-Random/basketrandom.png",
-    "tags": [
-      "Sports",
-      "Arcade",
-      "Multiplayer"
-    ],
-    "rating": 4.8,
-    "plays": 71783,
-    "author": "M. S. Studio",
-    "iframeSrc": "https://basket-random.pages.dev/",
-    "iframeCode": "<iframe src=\"https://basket-random.pages.dev/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
   },
   {
     "id": "snow-rider-3d",
@@ -255,21 +110,6 @@
     "iframeCode": "<iframe src=\"https://cookie-clicker.pages.dev/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
   },
   {
-    "id": "retro-bowl",
-    "title": "Retro Bowl",
-    "description": "Manage and play American football! Call plays, pass to receivers, and win championships in retro style.",
-    "category": "Sports",
-    "thumbnail": "https://ubghyper.github.io/GameList.github.io/Retro-Bowl/retrobowl.jpg",
-    "tags": [
-      "Sports"
-    ],
-    "rating": 4.8,
-    "plays": 98030,
-    "author": "New Star Games",
-    "iframeSrc": "https://retro--bowl.pages.dev/",
-    "iframeCode": "<iframe src=\"https://retro--bowl.pages.dev/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
-  },
-  {
     "id": "happy-wheels",
     "title": "Happy Wheels",
     "description": "Hilariously brutal physics platformer! Navigate deadly obstacle courses with realistic ragdoll physics and dark comedy.",
@@ -283,21 +123,6 @@
     "author": "Jim Bonacci",
     "iframeSrc": "https://ubghyper.github.io/g/Happy-Wheels/",
     "iframeCode": "<iframe src=\"https://ubghyper.github.io/g/Happy-Wheels/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
-  },
-  {
-    "id": "fnaf-4",
-    "title": "Five Nights at Freddy's 4",
-    "description": "Five Nights at Freddy's is a horror game playable free and unblocked at UBGHyper. Runs instantly in your browser with no download, no sign-up, and works at school on a Chromebook.",
-    "category": "Horror",
-    "thumbnail": "https://freeonlinewebtools.github.io/gamelist6.github.io/FNAF-4/FNAF-4.png",
-    "tags": [
-      "Horror"
-    ],
-    "rating": 4.5,
-    "plays": 47151,
-    "author": "Scott Cawthon",
-    "iframeSrc": "https://freeonlinewebtools.github.io/gamelist6.github.io/FNAF-4/",
-    "iframeCode": "<iframe src=\"https://freeonlinewebtools.github.io/gamelist6.github.io/FNAF-4/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
   },
   {
     "id": "polytrack-new",
@@ -504,54 +329,6 @@
     "iframeCode": "<iframe src=\"https://ubghyper.github.io/g/Bloons-TD-5/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
   },
   {
-    "id": "fnaf-1",
-    "title": "Five Nights at Freddy's",
-    "description": "Five Nights at Freddy's is a horror survival point-and-click game playable free and unblocked at UBGHyper. Survive the night against the animatronics \u2014 no download, runs in your browser, works at school on a Chromebook.",
-    "category": "Horror",
-    "thumbnail": "https://freeonlinewebtools.github.io/gamelist8.github.io/FNAF-1/FNAF-1.png",
-    "tags": [
-      "Horror",
-      "Simulation"
-    ],
-    "rating": 4.7,
-    "plays": 109917,
-    "author": "Scott Cawthon",
-    "iframeSrc": "https://freeonlinewebtools.github.io/gamelist8.github.io/FNAF-1/",
-    "iframeCode": "<iframe src=\"https://freeonlinewebtools.github.io/gamelist8.github.io/FNAF-1/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
-  },
-  {
-    "id": "fnaf-2",
-    "title": "Five Nights at Freddy's 2",
-    "description": "Five Nights at Freddy's 2 is a horror survival point-and-click game playable free and unblocked at UBGHyper. Survive the night against the animatronics \u2014 no download, runs in your browser, works at school on a Chromebook.",
-    "category": "Horror",
-    "thumbnail": "https://freeonlinewebtools.github.io/gamelist8.github.io/FNAF-2/FNAF-2.png",
-    "tags": [
-      "Horror",
-      "Simulation"
-    ],
-    "rating": 4.8,
-    "plays": 141980,
-    "author": "Scott Cawthon",
-    "iframeSrc": "https://freeonlinewebtools.github.io/gamelist8.github.io/FNAF-2/",
-    "iframeCode": "<iframe src=\"https://freeonlinewebtools.github.io/gamelist8.github.io/FNAF-2/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
-  },
-  {
-    "id": "fnaf-3",
-    "title": "Five Nights at Freddy's 3",
-    "description": "Five Nights at Freddy's 3 is a horror survival point-and-click game playable free and unblocked at UBGHyper. Survive the night against the animatronics \u2014 no download, runs in your browser, works at school on a Chromebook.",
-    "category": "Horror",
-    "thumbnail": "https://freeonlinewebtools.github.io/gamelist8.github.io/FNAF-3/FNAF-3.png",
-    "tags": [
-      "Horror",
-      "Simulation"
-    ],
-    "rating": 4.9,
-    "plays": 78793,
-    "author": "Scott Cawthon",
-    "iframeSrc": "https://freeonlinewebtools.github.io/gamelist8.github.io/FNAF-3/",
-    "iframeCode": "<iframe src=\"https://freeonlinewebtools.github.io/gamelist8.github.io/FNAF-3/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
-  },
-  {
     "id": "terraria",
     "title": "Terraria",
     "description": "Terraria is a adventure sandbox game playable free and unblocked at UBGHyper. Runs instantly in your browser with no download, no sign-up, and works at school on a Chromebook.",
@@ -597,22 +374,6 @@
     "author": "UBG Community",
     "iframeSrc": "https://freeonlinewebtools.github.io/gamelist7.github.io/Krunker/",
     "iframeCode": "<iframe src=\"https://freeonlinewebtools.github.io/gamelist7.github.io/Krunker/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
-  },
-  {
-    "id": "1v1-lol",
-    "title": "1v1.LOL",
-    "description": "1v1.LOL is a shooter action game playable free and unblocked at UBGHyper. Runs instantly in your browser with no download, no sign-up, and works at school on a Chromebook.",
-    "category": "Shooter",
-    "thumbnail": "https://ubghyper.github.io/GameList.github.io/1v1-LOL/1v1-LOL.png",
-    "tags": [
-      "Shooter",
-      "Action"
-    ],
-    "rating": 4.8,
-    "plays": 133935,
-    "author": "JustPlay.LOL",
-    "iframeSrc": "https://1v1-lol.pages.dev/",
-    "iframeCode": "<iframe src=\"https://1v1-lol.pages.dev/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
   },
   {
     "id": "brawl-stars",
@@ -1855,23 +1616,6 @@
     "author": "Dani",
     "iframeSrc": "https://freeonlinewebtools.github.io/gamelist2.github.io/jelly-drift/",
     "iframeCode": "<iframe src=\"https://freeonlinewebtools.github.io/gamelist2.github.io/jelly-drift/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
-  },
-  {
-    "id": "minecraft",
-    "title": "Minecraft 1.12.2",
-    "description": "Minecraft 1.12.2 running fully in your browser \u2014 build, mine and explore in survival or creative, with worlds saved locally so you can pick up where you left off. Join Eaglercraft multiplayer servers free, no account and no download needed.",
-    "category": "Sandbox",
-    "thumbnail": "https://freeonlinewebtools.github.io/gamelist9.github.io/Minecraft/minecraft.png",
-    "tags": [
-      "Sandbox",
-      "Multiplayer",
-      "Adventure"
-    ],
-    "rating": 4.7,
-    "plays": 26567,
-    "author": "Eaglercraft by lax1dude",
-    "iframeSrc": "https://freeonlinewebtools.github.io/gamelist9.github.io/Minecraft/",
-    "iframeCode": "<iframe src=\"https://freeonlinewebtools.github.io/gamelist9.github.io/Minecraft/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
   },
   {
     "id": "tiny-fishing",
@@ -3970,22 +3714,6 @@
     "author": "original creators",
     "iframeSrc": "https://freeonlinewebtools.github.io/gamelist4.github.io/Granny-3/",
     "iframeCode": "<iframe src=\"https://freeonlinewebtools.github.io/gamelist4.github.io/Granny-3/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
-  },
-  {
-    "id": "granny-2",
-    "title": "Granny 2",
-    "description": "Granny 2 is a chilling horror experience. Stay alert, watch every shadow, and survive until dawn.",
-    "category": "Horror",
-    "thumbnail": "https://freeonlinewebtools.github.io/gamelist4.github.io/Granny-2/Granny-2.png",
-    "tags": [
-      "Horror",
-      "Arcade"
-    ],
-    "rating": 4.9,
-    "plays": 31194,
-    "author": "original creators",
-    "iframeSrc": "https://freeonlinewebtools.github.io/gamelist4.github.io/Granny-2/",
-    "iframeCode": "<iframe src=\"https://freeonlinewebtools.github.io/gamelist4.github.io/Granny-2/\" width=\"100%\" height=\"100%\" frameborder=\"0\" allow=\"autoplay; fullscreen; gamepad; pointer-lock\" allowfullscreen></iframe>"
   },
   {
     "id": "sonic-3-air",
