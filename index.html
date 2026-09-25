@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Owen Watermelon V3</title>
+    <meta name="description" content="Unblocked games website template with built-in iframe games catalog, tab cloaker, web proxy tools, and customizable games JSON." />
+    <meta property="og:title" content="Owen Watermelon V3" />
+    <meta property="og:description" content="Unblocked games website template with built-in iframe games catalog, tab cloaker, web proxy tools, and customizable games JSON." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="alternate icon" href="./favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+      // Fix GitHub Pages missing trailing slash so relative paths ./assets/... resolve to /repo/assets instead of /assets
+      (function() {
+        var p = window.location.pathname;
+        if (!p.endsWith('/') && !p.split('/').pop().includes('.')) {
+          window.location.replace(p + '/' + window.location.search + window.location.hash);
+        }
+      })();
+
+      // Display diagnostic overlay if a critical script or stylesheet 404s
+      window.addEventListener('error', function(e) {
+        var resourceUrl = e.target && (e.target.src || e.target.href);
+        if (resourceUrl && !resourceUrl.includes('favicon.ico')) {
+          var root = document.getElementById('root');
+          if (root && root.children.length === 0) {
+            var banner = document.getElementById('diag-404');
+            if (!banner) {
+              banner = document.createElement('div');
+              banner.id = 'diag-404';
+              banner.style.cssText = 'position:fixed;top:40px;left:50%;transform:translateX(-50%);width:90%;max-width:620px;background:#0d2618;border:2px solid #10b981;border-radius:14px;padding:24px;color:#fff;font-family:system-ui,sans-serif;box-shadow:0 20px 40px rgba(0,0,0,0.8);z-index:999999;';
+              document.body.appendChild(banner);
+            }
+            banner.innerHTML = '<h3 style="color:#34d399;margin-top:0;font-size:18px;">🍉 GitHub Pages 404 Resource Detected</h3>' +
+              '<p style="color:#94a3b8;font-size:14px;line-height:1.5;">The browser could not load: <br><code style="color:#f87171;background:#06140d;padding:4px 8px;border-radius:4px;display:inline-block;margin:6px 0;word-break:break-all;">' + resourceUrl + '</code></p>' +
+              '<div style="background:#06140d;padding:12px 16px;border-radius:8px;font-size:13px;line-height:1.7;color:#cbd5e1;border:1px solid #16402a;margin-top:12px;">' +
+              '<strong>How to resolve:</strong><br>' +
+              'In your GitHub repo: <strong>Settings &rarr; Pages &rarr; Branch: main &rarr; Folder: /docs</strong> (or switch Source to <strong>GitHub Actions</strong>).' +
+              '</div>';
+          }
+        }
+      }, true);
+    </script>
+  </head>
+  <body class="bg-[#07130c] text-slate-100 min-h-screen antialiased selection:bg-[#ff2d55]/30 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="./src/main.tsx"></script>
+    <script>
+      (function() {
+        // Fallback for hosting from repository root on GitHub Pages without build server
+        setTimeout(function() {
+          var root = document.getElementById('root');
+          if (root && root.children.length === 0) {
+            var script = document.createElement('script');
+            script.type = 'module';
+            script.crossOrigin = 'anonymous';
+            script.src = './assets/index.js';
+            document.body.appendChild(script);
+
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.crossOrigin = 'anonymous';
+            link.href = './assets/index.css';
+            document.head.appendChild(link);
+          }
+        }, 300);
+      })();
+    </script>
+  </body>
+
+</html>
+
+
